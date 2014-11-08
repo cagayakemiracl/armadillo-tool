@@ -3,7 +3,6 @@
 
 # Copyright (c) 2014 cagayakemiracl All Rights Reserved.
 # $Mail: <cagayakemiracl@gmail.com>
-
 require 'fileutils'
 require 'pathname'
 
