@@ -12,7 +12,7 @@ task :build do
   end
 end
 
-task :clean do
+task :refresh do
   on roles(:atde) do
     execute project_dir + 'make clean'
   end

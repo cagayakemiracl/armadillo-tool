@@ -21,9 +21,9 @@ module Capistrano
     call_cap('build')
   end
 
-  def clean
-    call_cap('clean')
+  def refresh
+    call_cap('refresh')
   end
 
-  module_function :config, :build, :clean
+  module_function :call_cap, :config, :build, :refresh
 end
