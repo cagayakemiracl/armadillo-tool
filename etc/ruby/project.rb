@@ -14,7 +14,7 @@ require 'optparse'
 params = ARGV.getopts('', 'build', 'create', 'delete', 'name:hoge', 'refresh')
 project = ArmCuiProject.new params['name']
 
-Capistrano.build if params['build']
-project.create if params['create']
 project.delete if params['delete']
+project.create if params['create']
 Capistrano.refresh if params['refresh']
+Capistrano.build if params['build']
