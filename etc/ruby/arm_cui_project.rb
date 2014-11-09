@@ -30,7 +30,7 @@ class ArmCuiProject
 
   def create
     if File.exist? @target_dir
-      puts 'Already file exists'
+      puts "Already directory exists (#{@target_dir})"
       exit 0
     end
 
@@ -44,7 +44,7 @@ class ArmCuiProject
 
   def delete
     unless File.exist? @target_dir
-      puts 'not found file'
+      puts "not found directory (#{@target_dir})"
       exit 0
     end
 
