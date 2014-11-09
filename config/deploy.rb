@@ -18,7 +18,7 @@ task :refresh do
   end
 end
 
-task :config do
+task :setting do
   on roles(:atde) do
     execute project_dir + 'cmake .'
   end

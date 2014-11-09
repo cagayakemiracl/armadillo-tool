@@ -15,8 +15,8 @@ module Capistrano
     puts "#{command} end"
   end
 
-  def config
-    call_cap('config')
+  def setting
+    call_cap('setting')
   end
 
   def build
@@ -27,5 +27,5 @@ module Capistrano
     call_cap('refresh')
   end
 
-  module_function :call_cap, :config, :build, :refresh
+  module_function :call_cap, :setting, :build, :refresh
 end

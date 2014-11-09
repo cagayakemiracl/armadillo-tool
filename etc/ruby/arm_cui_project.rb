@@ -58,7 +58,7 @@ class ArmCuiProject
 
   def finalize(command)
     puts "#{@target} #{command} success!!"
-    config
+    setting
   end
 
   def delete_file_data(file, data)
