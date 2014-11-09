@@ -34,7 +34,7 @@ class ArmCuiProject
     open(@target_cmake_list_file, 'w') { |f| f.printf CMAKE_LIST_DATA, @target }
     open(SRC_CMAKE_LIST_FILE, 'a') { |f| f.puts @cmake_add_dir_data }
 
-    rebuild ROOT_DIR
+    config ROOT_DIR
   end
 
   def delete
@@ -43,14 +43,14 @@ class ArmCuiProject
     FileUtils.rm_rf @target_dir
     delete_file_data SRC_CMAKE_LIST_FILE, @cmake_add_dir_data
 
-    rebuild ROOT_DIR
+    config ROOT_DIR
   end
 
   private
 
-  def rebuild(dir)
+  def config(dir)
     FileUtils.cd dir
-    system 'cmake .'
+    system 'cap production config'
   end
 
   def delete_file_data(file, data)
