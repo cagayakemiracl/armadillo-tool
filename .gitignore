@@ -3,5 +3,5 @@ Makefile
 cmake_install.cmake
 CMakeFiles
 src/
-led_flash
-morse
+liborig.a
+liborig.so
