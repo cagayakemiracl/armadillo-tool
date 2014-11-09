@@ -10,7 +10,7 @@ $LOAD_PATH.unshift File.dirname Pathname.new(__FILE__).realpath
 require 'arm_cui_project'
 require 'optparse'
 
-params = ARGV.getopts('', 'name:hoge', 'create', 'delete')
+params = ARGV.getopts('', 'create', 'delete', 'name:hoge')
 project = ArmCuiProject.new params['name']
 
 project.create if params['create']
