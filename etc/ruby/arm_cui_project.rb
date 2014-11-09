@@ -29,26 +29,37 @@ class ArmCuiProject
   end
 
   def create
-    exit 0 if File.exist? @target_dir
+    if File.exist? @target_dir
+      puts 'Already file exists'
+      exit 0
+    end
 
     Dir.mkdir @target_dir
     FileUtils.cp ETC_MAIN_C_FILE, @target_main_c_file
     open(@target_cmake_list_file, 'w') { |f| f.printf CMAKE_LIST_DATA, @target }
     open(SRC_CMAKE_LIST_FILE, 'a') { |f| f.puts @cmake_add_dir_data }
 
-    config
+    finalize 'create'
   end
 
   def delete
-    exit 0 unless File.exist? @target_dir
+    unless File.exist? @target_dir
+      puts 'not found file'
+      exit 0
+    end
 
     FileUtils.rm_rf @target_dir
     delete_file_data SRC_CMAKE_LIST_FILE, @cmake_add_dir_data
 
-    config
+    finalize 'delete'
   end
 
   private
+
+  def finalize(command)
+    puts "#{@target} #{command} success!!"
+    config
+  end
 
   def delete_file_data(file, data)
     file_line = []

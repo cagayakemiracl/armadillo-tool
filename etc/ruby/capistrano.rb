@@ -9,8 +9,10 @@ module Capistrano
   CAP_FILE_DIR = File.expand_path '../cap/', Dir::THIS_DIR
 
   def call_cap(command)
+    puts "#{command} start"
     FileUtils.cd Dir::ROOT_DIR
     system "cap production #{command}"
+    puts "#{command} end"
   end
 
   def config
