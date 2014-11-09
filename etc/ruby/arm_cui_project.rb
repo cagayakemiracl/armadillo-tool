@@ -13,15 +13,15 @@ class ArmCuiProject
   CMAKE_LIST = 'CMakeLists.txt'
   MAIN_C = 'main.c'
 
-  ETC_MAIN_C_FILE = File.expand_path './etc/' + MAIN_C, Dir::ROOT_DIR
-  SRC_CMAKE_LIST_FILE = File.expand_path './src/' + CMAKE_LIST, Dir::ROOT_DIR
+  ETC_MAIN_C_FILE = File.expand_path MAIN_C, Dir::ETC_DIR
+  SRC_CMAKE_LIST_FILE = File.expand_path CMAKE_LIST, Dir::SRC_DIR
 
-  CMAKE_LIST_DATA = File.read File.expand_path '../' + CMAKE_LIST, Dir::THIS_DIR
+  CMAKE_LIST_DATA = File.read File.expand_path CMAKE_LIST, Dir::ETC_DIR
 
   def initialize(target = 'hoge')
     @target = target
 
-    @target_dir =  File.expand_path './src/' + @target, Dir::ROOT_DIR
+    @target_dir =  File.expand_path './' + @target + '/', Dir::SRC_DIR
     @target_main_c_file = File.expand_path MAIN_C, @target_dir
     @target_cmake_list_file = File.expand_path CMAKE_LIST, @target_dir
 
