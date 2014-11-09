@@ -4,11 +4,7 @@
 # Copyright (c) 2014 cagayakemiracl All Rights Reserved.
 # $Mail: <cagayakemiracl@gmail.com>
 require 'fileutils'
-require 'pathname'
-
-class Dir
-  THIS_DIR = File.expand_path File.dirname Pathname.new(__FILE__).realpath
-end
+require 'dir'
 
 class ArmCuiProject
   CMAKE_LIST = 'CMakeLists.txt'
