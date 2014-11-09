@@ -5,8 +5,11 @@
 # $Mail: <cagayakemiracl@gmail.com>
 require 'fileutils'
 require 'dir'
+require 'capistrano'
 
 class ArmCuiProject
+  include Capistrano
+
   CMAKE_LIST = 'CMakeLists.txt'
   MAIN_C = 'main.c'
 
@@ -33,7 +36,7 @@ class ArmCuiProject
     open(@target_cmake_list_file, 'w') { |f| f.printf CMAKE_LIST_DATA, @target }
     open(SRC_CMAKE_LIST_FILE, 'a') { |f| f.puts @cmake_add_dir_data }
 
-    config Dir::ROOT_DIR
+    config
   end
 
   def delete
@@ -42,15 +45,10 @@ class ArmCuiProject
     FileUtils.rm_rf @target_dir
     delete_file_data SRC_CMAKE_LIST_FILE, @cmake_add_dir_data
 
-    config Dir::ROOT_DIR
+    config
   end
 
   private
-
-  def config(dir)
-    FileUtils.cd dir
-    system 'cap production config'
-  end
 
   def delete_file_data(file, data)
     file_line = []
