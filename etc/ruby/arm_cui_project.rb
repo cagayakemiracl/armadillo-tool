@@ -10,16 +10,15 @@ class ArmCuiProject
   CMAKE_LIST = 'CMakeLists.txt'
   MAIN_C = 'main.c'
 
-  ROOT_DIR = File.expand_path '../../', Dir::THIS_DIR # program on ./etc/ruby/
-  ETC_MAIN_C_FILE = File.expand_path './etc/' + MAIN_C, ROOT_DIR
-  SRC_CMAKE_LIST_FILE = File.expand_path './src/' + CMAKE_LIST, ROOT_DIR
+  ETC_MAIN_C_FILE = File.expand_path './etc/' + MAIN_C, Dir::ROOT_DIR
+  SRC_CMAKE_LIST_FILE = File.expand_path './src/' + CMAKE_LIST, Dir::ROOT_DIR
 
   CMAKE_LIST_DATA = File.read File.expand_path '../' + CMAKE_LIST, Dir::THIS_DIR
 
   def initialize(target = 'hoge')
     @target = target
 
-    @target_dir =  File.expand_path './src/' + @target, ROOT_DIR
+    @target_dir =  File.expand_path './src/' + @target, Dir::ROOT_DIR
     @target_main_c_file = File.expand_path MAIN_C, @target_dir
     @target_cmake_list_file = File.expand_path CMAKE_LIST, @target_dir
 
@@ -34,7 +33,7 @@ class ArmCuiProject
     open(@target_cmake_list_file, 'w') { |f| f.printf CMAKE_LIST_DATA, @target }
     open(SRC_CMAKE_LIST_FILE, 'a') { |f| f.puts @cmake_add_dir_data }
 
-    config ROOT_DIR
+    config Dir::ROOT_DIR
   end
 
   def delete
@@ -43,7 +42,7 @@ class ArmCuiProject
     FileUtils.rm_rf @target_dir
     delete_file_data SRC_CMAKE_LIST_FILE, @cmake_add_dir_data
 
-    config ROOT_DIR
+    config Dir::ROOT_DIR
   end
 
   private
