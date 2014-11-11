@@ -9,7 +9,9 @@ $LOAD_PATH.unshift File.dirname Pathname.new(__FILE__).realpath
 
 require 'arm_cui_project'
 require 'capistrano'
+require 'dir'
 require 'optparse'
+require 'yaml'
 
 params = ARGV.getopts(
   '',
@@ -17,16 +19,26 @@ params = ARGV.getopts(
   'create',
   'delete',
   'ftp',
-  'ip:10.134.31.100',
+  'ip:not_address',
   'name:hoge',
   'refresh',
   'setting')
 
 project = ArmCuiProject.new params['name']
+CONFIG_YAML_FILE = File.expand_path './config.yaml', Dir::ROOT_DIR
+config = YAML.load_file CONFIG_YAML_FILE
+
+p config
+if params['ip'] != 'not_address'
+  config['ip'] = params['ip']
+  open(CONFIG_YAML_FILE, 'w') do |f|
+    YAML.dump(config, f)
+  end
+end
 
 project.delete if params['delete']
 project.create if params['create']
 Capistrano.setting if params['setting']
 Capistrano.refresh if params['refresh']
 Capistrano.build if params['build']
-project.ftp params['ip'] if params['ftp']
+project.ftp config['ip'] if params['ftp']
