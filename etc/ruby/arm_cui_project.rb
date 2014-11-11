@@ -54,6 +54,17 @@ class ArmCuiProject
     finalize 'delete'
   end
 
+  def ftp(ip)
+    target_exe_file = File.expand_path './' + @target + '/', @target_dir
+    unless File.exist? target_exe_file
+      puts "not found file #{target_exe_file}"
+      exit 0
+    end
+
+    FileUtils.cd @target_dir
+    system "printf \"user ftp none\ncd pub\nput #{@target}\" \| ftp -n #{ip}"
+  end
+
   private
 
   def finalize(command)
