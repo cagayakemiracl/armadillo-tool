@@ -28,7 +28,6 @@ project = ArmCuiProject.new params['name']
 CONFIG_YAML_FILE = File.expand_path './config.yaml', Dir::ROOT_DIR
 config = YAML.load_file CONFIG_YAML_FILE
 
-p config
 if params['ip'] != 'not_address'
   config['ip'] = params['ip']
   open(CONFIG_YAML_FILE, 'w') do |f|
