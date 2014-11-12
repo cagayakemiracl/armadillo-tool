@@ -4,22 +4,13 @@ lock '3.2.1'
 set :application, 'my_app_name'
 set :repo_url, 'git@example.com:me/my_repo.git'
 
-project_dir = 'cd /media/sf_armadillo-tool && '
+ftp_dir = 'cd /home/ftp/pub && '
 
-task :build do
-  on roles(:atde) do
-    execute project_dir + 'make'
-  end
-end
+set :use_sudo, true
+set :sudo, 'sudo -u root -i'
 
-task :clean do
-  on roles(:atde) do
-    execute project_dir + 'make clean'
-  end
-end
-
-task :config do
-  on roles(:atde) do
-    execute project_dir + 'cmake .'
+task :go do
+  on roles(:armadillo) do
+    execute ftp_dir + "#{sudo} chmod +x %s && #{sudo} ./%s"
   end
 end

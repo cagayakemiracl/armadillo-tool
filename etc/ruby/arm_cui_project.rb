@@ -39,6 +39,8 @@ class ArmCuiProject
     open(@target_cmake_list_file, 'w') { |f| f.printf CMAKE_LIST_DATA, @target }
     open(SRC_CMAKE_LIST_FILE, 'a') { |f| f.puts @cmake_add_dir_data }
 
+    create_cap
+
     finalize 'create'
   end
 
@@ -65,6 +67,22 @@ class ArmCuiProject
     system "printf \"user ftp none\ncd pub\nput #{@target}\" \| ftp -n #{ip}"
   end
 
+  def setting
+    super Dir::ROOT_DIR
+  end
+
+  def build
+    super Dir::ROOT_DIR
+  end
+
+  def refresh
+    super Dir::ROOT_DIR
+  end
+
+  def go
+    super @target_dir
+  end
+
   private
 
   def finalize(command)
@@ -80,5 +98,14 @@ class ArmCuiProject
     open(file, 'w') do |f|
       file_line.each { |line| f.puts line }
     end
+  end
+
+  def create_cap
+    cap_dir = File.expand_path './cap', Dir::ETC_DIR
+    dep_data = File.read File.expand_path './config/deploy.rb', cap_dir
+    dep_file = File.expand_path './config/deploy.rb', @target_dir
+
+    FileUtils.copy_entry cap_dir, @target_dir
+    open(dep_file, 'w') { |f| f.printf dep_data, @target, @target }
   end
 end

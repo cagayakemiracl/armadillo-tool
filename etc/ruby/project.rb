@@ -19,6 +19,7 @@ params = ARGV.getopts(
   'create',
   'delete',
   'ftp',
+  'go',
   'ip:not_address',
   'name:hoge',
   'refresh',
@@ -37,7 +38,9 @@ end
 
 project.delete if params['delete']
 project.create if params['create']
-Capistrano.setting if params['setting']
-Capistrano.refresh if params['refresh']
-Capistrano.build if params['build']
+project.setting if params['setting']
+project.refresh if params['refresh']
+project.build if params['build']
 project.ftp config['ip'] if params['ftp']
+
+project.go if params['go']

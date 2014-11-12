@@ -8,24 +8,28 @@ require 'dir'
 module Capistrano
   CAP_FILE_DIR = File.expand_path '../cap/', Dir::THIS_DIR
 
-  def call_cap(command)
+  def call_cap(command, dir)
     puts "#{command} start"
-    FileUtils.cd Dir::ROOT_DIR
+    FileUtils.cd dir
     system "cap production #{command}"
     puts "#{command} end"
   end
 
-  def setting
-    call_cap('setting')
+  def setting(dir)
+    call_cap 'setting', dir
   end
 
-  def build
-    call_cap('build')
+  def build(dir)
+    call_cap 'build', dir
   end
 
-  def refresh
-    call_cap('refresh')
+  def refresh(dir)
+    call_cap 'refresh', dir
   end
 
-  module_function :call_cap, :setting, :build, :refresh
+  def go(dir)
+    call_cap 'go', dir
+  end
+
+  module_function :call_cap, :setting, :build, :refresh, :go
 end
