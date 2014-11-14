@@ -3,9 +3,9 @@
 
 #include "orig.h"
 
-int open_file(char *path, int kind)
-{
+int open_file(char *path, int kind) {
   int fd;
+
   fd = open(path, kind);
   if (fd == -1) {
     perror("open");
@@ -14,4 +14,3 @@ int open_file(char *path, int kind)
 
   return fd;
 }
-

@@ -3,7 +3,4 @@
 
 #include "orig.h"
 
-void turn_off_led(char *color)
-{
-  control_led(color, 0);
-}
+void turn_off_led(char *color) { control_led(color, 0); }

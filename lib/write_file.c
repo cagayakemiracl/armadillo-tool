@@ -3,9 +3,9 @@
 
 #include "orig.h"
 
-int write_file(int fd, char *data)
-{
+int write_file(int fd, char *data) {
   int len;
+
   len = write(fd, data, strlen(data));
   if (len == -1) {
     perror("write");
@@ -14,4 +14,3 @@ int write_file(int fd, char *data)
 
   return len;
 }
-

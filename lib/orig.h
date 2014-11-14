@@ -24,4 +24,4 @@ void turn_off_led(char *color);
 
 int str2int(char *str);
 
-#endif // _ORIG_H_
+#endif  // _ORIG_H_

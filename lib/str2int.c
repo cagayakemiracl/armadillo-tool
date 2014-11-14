@@ -3,9 +3,9 @@
 
 #include "orig.h"
 
-int str2int(char *str)
-{
+int str2int(char *str) {
   int ret, num;
+
   ret = sscanf(str, "%20d", &num);
   if (ret != 1) {
     perror("num");
@@ -14,4 +14,3 @@ int str2int(char *str)
 
   return num;
 }
-
